@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login / Cadastro</title>
+</head>
+<body>
+    <h2>Criar Conta</h2>
+    <input type="text" id="registroNome" placeholder="Nome"><br>
+    <input type="password" id="registroSenha" placeholder="Senha"><br>
+    <button onclick="criarConta()">Registrar</button>
+
+    <h2>Entrar</h2>
+    <input type="text" id="loginNome" placeholder="Nome"><br>
+    <input type="password" id="loginSenha" placeholder="Senha"><br>
+    <button onclick="fazerLogin()">Entrar</button>
+
+    <p id="mensagem"></p>
+
+    <script>
+        async function criarConta() {
+            const nome = document.getElementById("registroNome").value;
+            const senha = document.getElementById("registroSenha").value;
+
+            const resposta = await fetch("http://localhost:8080/api/registro", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nome, senha })
+            });
+
+            const texto = await resposta.text();
+            document.getElementById("mensagem").innerText = texto;
+        }
+
+        async function fazerLogin() {
+            const nome = document.getElementById("loginNome").value;
+            const senha = document.getElementById("loginSenha").value;
+
+            const resposta = await fetch("http://localhost:8080/api/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nome, senha })
+            });
+
+            const texto = await resposta.text();
+            document.getElementById("mensagem").innerText = texto;
+        }
+    </script>
+</body>
+</html>
