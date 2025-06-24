@@ -19,7 +19,7 @@ public class LoginService {
     private final WebClient webClient;
     
     public LoginService() {
-        this.webClient = WebClient.builder().baseUrl("\"http://localhost:8080/login").build();
+        this.webClient = WebClient.builder().baseUrl("http://localhost:8080/login").build();
     }
     
     public Login salva(Login login) {
